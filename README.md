@@ -1,2 +1,2 @@
 # Codecademy_projects-SQL
-My codecademy projects and solutions
+My codecademy projects and refrences for further use...
