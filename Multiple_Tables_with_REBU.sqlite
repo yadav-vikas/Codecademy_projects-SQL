@@ -1,0 +1,28 @@
+SELECT * FROM trips;
+SELECT * FROM riders;
+SELECT * FROM cars;
+
+select id as 'primary_trip' from trips;
+select id as 'primary_riders' from riders;
+select id as 'primary_cars' from cars;
+
+select * from riders cross join cars ;
+
+select *
+ from trips left join riders 
+ON riders.id = trips.rider_id ;
+
+select * from trips join cars on
+trips.car_id = cars.id ;
+
+select * from riders 
+union
+select * from riders2 ;
+
+select avg(cost) as 'avg cost' from trips ;
+
+select * from riders where total_trips < 500 ;
+
+select count(*) as 'active_cars' from cars where status = 'active' ;
+
+select * from cars order by trips_completed DESC limit 2;
