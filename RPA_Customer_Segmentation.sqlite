@@ -1,0 +1,7 @@
+ SELECT * FROM users LIMIT 20;
+ select email,birthday from users where birthday between '1980-01-01' and '1989-12-31';
+ select email,created_at from users where created_at < '01-05-2017';
+ select email from users where test = 'bears';
+ select email from users where campaign  like 'BBB%';
+ select email from users where campaign like '%-2';
+ select email from users where campaign is not null and test is not null;
