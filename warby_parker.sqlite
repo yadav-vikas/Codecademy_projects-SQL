@@ -1,1 +1,76 @@
 
+
+SELECT * FROM survey  LIMIT 10;
+
+SELECT question,
+  COUNT(DISTINCT user_id) AS 'users answered'
+FROM survey
+  GROUP BY question ;
+
+select * from quiz limit 10;
+select * from home_try_on limit 10 ;
+select * from purchase limit 10 ;
+
+select * from quiz limit 10;
+select * from home_try_on limit 10;
+select * from purchase limit 10;
+
+
+SELECT DISTINCT q.user_id,
+  h.user_id IS NOT NULL AS 'is_home_try_on',
+  h.number_of_pairs,
+  p.user_id IS NOT NULL AS 'is_purchase'
+FROM quiz AS 'q'
+LEFT JOIN home_try_on AS 'h'
+ON q.user_id = h.user_id
+LEFT JOIN purchase AS 'p'
+ON p.user_id = q.user_id
+LIMIT 10 ;
+
+/*INSIGHTS */
+
+SELECT 
+number_of_pairs,
+COUNT(DISTINCT h.user_id) AS 'Tryout',
+COUNT (DISTINCT p.user_id) AS 'Purhase_after_tryout'
+FROM home_try_on AS 'h'
+LEFT JOIN purchase AS 'p'
+ON h.user_id = p.user_id
+WHERE number_of_pairs IS NOT NULL
+GROUP BY number_of_pairs;
+
+SELECT style,
+COUNT(user_id) AS 'users'
+FROM purchase GROUP BY style;
+
+SELECT style,
+ROUND(AVG(price),2) AS 'AVG_price',
+MAX(price) AS 'MAX_price',
+MIN(price) AS 'MIN_price'
+FROM purchase
+GROUP BY style;
+
+SELECT color AS 'color',
+COUNT(user_id) AS 'MALE_color_choices'
+FROM purchase
+WHERE style LIKE 'Men%'
+GROUP BY color;
+
+SELECT color AS 'color',
+COUNT(user_id) AS 'FEMALE_color_choices'
+FROM purchase
+WHERE style LIKE 'Wo%'
+GROUP BY color;
+
+SELECT 
+number_of_pairs,
+COUNT(DISTINCT h.user_id) AS 'Male_Tryout',
+COUNT (DISTINCT p.user_id) AS 'Purhase_after_tryout'
+FROM home_try_on AS 'h'
+LEFT JOIN purchase AS 'p'
+ON h.user_id = p.user_id
+WHERE number_of_pairs IS NOT NULL
+AND p.style LIKE 'Men%'
+GROUP BY number_of_pairs;
+
+
